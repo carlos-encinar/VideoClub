@@ -29,7 +29,7 @@ namespace EjemploConexionBBDD
                 "Select * FROM usuarios WHERE " +
                 "usuario = '" +  textBox1.Text +
                 "'And pass = '" + textBox2.Text +
-                "';", conexion);
+                "';'", conexion);
             MySqlDataReader resultado = comando.ExecuteReader();
 
             if (resultado.Read())
@@ -42,10 +42,13 @@ namespace EjemploConexionBBDD
             else
             {
                 intentos++;
-                MessageBox.Show("Usuario Y/O contrseña incorrecto(s)", "ERROR");
+                if (intentos < 3)
+                {
+                    MessageBox.Show("Usuario Y/O contrseña incorrecto(s)", "ERROR");
+                }
                 if (intentos == 3)
                 {
-                    MessageBox.Show("Has agotado el número de intentos, por favor, espere 5 segundos y vuelva a intentarlo");
+                    MessageBox.Show("Has agotado el número de intentos (3), por favor, espere 5 segundos y vuelva a intentarlo.");
                     intentos = 0;
                     button1.Enabled = false;
                     timer1.Start();
