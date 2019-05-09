@@ -36,7 +36,7 @@
             this.desplegableActores1.FormattingEnabled = true;
             this.desplegableActores1.Location = new System.Drawing.Point(45, 62);
             this.desplegableActores1.Name = "desplegableActores1";
-            this.desplegableActores1.Size = new System.Drawing.Size(544, 21);
+            this.desplegableActores1.Size = new System.Drawing.Size(268, 21);
             this.desplegableActores1.TabIndex = 0;
             // 
             // VentanaPrincipal
@@ -44,6 +44,7 @@
             this.ClientSize = new System.Drawing.Size(645, 402);
             this.Controls.Add(this.desplegableActores1);
             this.Name = "VentanaPrincipal";
+            this.Load += new System.EventHandler(this.VentanaPrincipal_Load);
             this.ResumeLayout(false);
 
         }

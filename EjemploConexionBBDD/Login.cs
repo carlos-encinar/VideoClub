@@ -13,6 +13,8 @@ namespace EjemploConexionBBDD
 {
     public partial class Login : Form
     {
+        int intentos = 0;
+
         public Login()
         {
             InitializeComponent();
@@ -20,6 +22,7 @@ namespace EjemploConexionBBDD
 
         private void button1_Click(object sender, EventArgs e)
         {
+
             MySqlConnection conexion = new ConexionBBDD().conecta();
 
             MySqlCommand comando = new MySqlCommand("" +
@@ -38,9 +41,28 @@ namespace EjemploConexionBBDD
             }
             else
             {
+                intentos++;
                 MessageBox.Show("Usuario Y/O contrseña incorrecto(s)", "ERROR");
+                if (intentos == 3)
+                {
+                    MessageBox.Show("Has agotado el número de intentos, por favor, espere 5 segundos y vuelva a intentarlo");
+                    intentos = 0;
+                    button1.Enabled = false;
+                    timer1.Start();
+                }
             }
                             
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            button1.Enabled = true;
+            timer1.Stop();
         }
     }
 }

@@ -39,11 +39,15 @@ namespace EjemploConexionBBDD
                 String last_name = resultado.GetString("last_name");
                 String gender = resultado.GetString("gender");
                 String film_count = resultado.GetString("film_count");
-
+                //para que no de fallo cuando un campo sea nulo
+                //if (!resultado.IsDBNull(3)) { rank = resultado.GetString(3); }
                 desplegableActores1.Items.Add(id + "--" + first_name + "--" + last_name);
             }
+            conexion.Close();
+        }
 
-
+        private void VentanaPrincipal_Load(object sender, EventArgs e)
+        {
 
         }
     }
