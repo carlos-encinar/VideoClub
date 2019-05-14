@@ -36,9 +36,9 @@
             // 
             this.desplegableActores1.BackColor = System.Drawing.Color.White;
             this.desplegableActores1.FormattingEnabled = true;
-            this.desplegableActores1.Location = new System.Drawing.Point(12, 69);
+            this.desplegableActores1.Location = new System.Drawing.Point(12, 81);
             this.desplegableActores1.Name = "desplegableActores1";
-            this.desplegableActores1.Size = new System.Drawing.Size(179, 21);
+            this.desplegableActores1.Size = new System.Drawing.Size(224, 21);
             this.desplegableActores1.TabIndex = 0;
             // 
             // label1
@@ -49,10 +49,9 @@
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(383, 57);
-            this.label1.TabIndex = 1;
+            this.label1.TabIndex = 2;
             this.label1.Text = "VENID A POR PELIS HIJOS DE PUTA";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // VentanaPrincipal
             // 
@@ -63,7 +62,6 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "VentanaPrincipal";
-            this.Load += new System.EventHandler(this.VentanaPrincipal_Load);
             this.ResumeLayout(false);
 
         }
