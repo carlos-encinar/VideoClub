@@ -36,7 +36,7 @@ namespace EjemploConexionBBDD
             MySqlConnection conexion = new MySqlConnection(
                 "Server = 127.0.0.1;" +
                 "Database= videoclub;" +
-                "Uid=root;" +
+                "Uid=root1234;" +
                 "Pwd=;" +
                 "Port=3306");
             try
