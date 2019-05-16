@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
+
 namespace EjemploConexionBBDD
 {
     public partial class VentanaPrincipal : Form
@@ -54,6 +55,44 @@ namespace EjemploConexionBBDD
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void desplegableActores1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buscador_TextChanged(object sender, EventArgs e)
+        {
+            if (buscador.Text != "")    
+            {
+                dataGridView1.CurrentCell = null;
+                
+                foreach (DataGridViewRow r in dataGridView1.Rows)
+                {
+                    r.Visible = false;
+                }
+
+                foreach (DataGridViewRow r in dataGridView1.Rows)
+                    foreach (DataGridViewCell c in r.Cells)
+                {
+                        if ((c.Value.ToString().ToUpper()).IndexOf(buscador.Text.ToUpper()) == 0){
+                            r.Visible = true;
+                            break;
+                        }
+                }
+            }
+            else
+            {
+               dataGridView1.DataSource= ConexionBBDD.consulta();
+
+            }
+        }
+
+        private void botonBuscador_Click(object sender, EventArgs e)
+        {
+            //ConexionBBDD.probarConexion();
+            dataGridView1.DataSource = ConexionBBDD.consulta();
         }
     }
 }

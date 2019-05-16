@@ -22,22 +22,34 @@ namespace EjemploConexionBBDD
 
         private void button1_Click(object sender, EventArgs e)
         {
+            
 
             MySqlConnection conexion = new ConexionBBDD().conecta();
-
             MySqlCommand comando = new MySqlCommand("" +
                 "Select * FROM usuarios WHERE " +
                 "usuario = '" +  textBox1.Text +
                 "'And pass = '" + textBox2.Text +
                 "';'", conexion);
             MySqlDataReader resultado = comando.ExecuteReader();
-
+            
             if (resultado.Read())
             {
-                MessageBox.Show("Acceso Correcto", "Usuario OK");
-                this.Visible = false;//oculta la ventana de login
-                VentanaPrincipal v = new VentanaPrincipal();
-                v.Visible = true;// o tamb v.show = true;
+                String Usuario = textBox1.Text;
+                String Contraseña = textBox2.Text;
+                if (Usuario.Contains(" ") && Usuario.Contains("'") 
+                    || Contraseña.Contains(" ") && Contraseña.Contains("'"))
+                {
+                    MessageBox.Show("No introduzca comandos por favor", "Error de comando");
+                    this.Enabled = true;
+                }
+                else
+                {
+                    MessageBox.Show("Acceso Correcto", "Usuario OK");
+                    this.Visible = false;//oculta la ventana de login
+                    VentanaPrincipal v = new VentanaPrincipal();
+                    v.Visible = true;// o tamb v.show = true;
+                }
+                
             }
             else
             {
@@ -66,6 +78,11 @@ namespace EjemploConexionBBDD
         {
             button1.Enabled = true;
             timer1.Stop();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
