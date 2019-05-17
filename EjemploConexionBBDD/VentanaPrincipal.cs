@@ -94,5 +94,10 @@ namespace EjemploConexionBBDD
             //ConexionBBDD.probarConexion();
             dataGridView1.DataSource = ConexionBBDD.consulta();
         }
+
+        private void dataGridView1_CellContentClick (object sender,EventArgs e)
+        {
+
+        }
     }
 }
