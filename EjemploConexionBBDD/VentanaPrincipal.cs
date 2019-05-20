@@ -47,21 +47,6 @@ namespace EjemploConexionBBDD
             conexion.Close();
         }
 
-        private void VentanaPrincipal_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void desplegableActores1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void buscador_TextChanged(object sender, EventArgs e)
         {
             if (buscador.Text != "")    
@@ -85,7 +70,6 @@ namespace EjemploConexionBBDD
             else
             {
                dataGridView1.DataSource= ConexionBBDD.consulta();
-
             }
         }
 
@@ -95,7 +79,29 @@ namespace EjemploConexionBBDD
             dataGridView1.DataSource = ConexionBBDD.consulta();
         }
 
-        private void dataGridView1_CellContentClick (object sender,EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+            Clientes c = new Clientes();
+            c.Visible = true;
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void desplegableActores1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

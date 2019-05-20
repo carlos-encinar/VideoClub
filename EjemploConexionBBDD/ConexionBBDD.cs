@@ -15,7 +15,7 @@ namespace EjemploConexionBBDD
         MySqlConnection conexion = new MySqlConnection(
                 "Server = 127.0.0.1;" +
                 "Database= videoclub;" +
-                "Uid=root;" +
+                "Uid=root1234;" +
                 "Pwd=;" +
                 "Port=3306");
         public MySqlConnection conecta()
@@ -38,7 +38,7 @@ namespace EjemploConexionBBDD
             MySqlConnection conexion = new MySqlConnection(
                    "Server = 127.0.0.1;" +
                    "Database= videoclub;" +
-                   "Uid=root;" +
+                   "Uid=root1234;" +
                    "Pwd=;" +
                    "Port=3306");
             DataTable tmp = new DataTable();
@@ -50,6 +50,35 @@ namespace EjemploConexionBBDD
             {
                 conexion.Open();
                 msj.Fill(tmp);
+                conexion.Close();
+            }
+            catch (Exception r)
+            {
+                MessageBox.Show(r.Message);
+            }
+            finally { conexion.Close(); }
+
+            return tmp;
+
+        }
+
+        public static DataTable consulta2()
+        {
+            MySqlConnection conexion = new MySqlConnection(
+                   "Server = 127.0.0.1;" +
+                   "Database= videoclub;" +
+                   "Uid=root1234;" +
+                   "Pwd=;" +
+                   "Port=3306");
+            DataTable tmp = new DataTable();
+
+            MySqlDataAdapter usu = new MySqlDataAdapter("select * from usuario as usuarios"
+                , conexion);
+
+            try
+            {
+                conexion.Open();
+                usu.Fill(tmp);
                 conexion.Close();
             }
             catch (Exception r)

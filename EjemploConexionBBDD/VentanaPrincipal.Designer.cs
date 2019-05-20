@@ -34,6 +34,7 @@
             this.buscador = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.desplegableActores1 = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,7 +53,7 @@
             // 
             // botonBuscador
             // 
-            this.botonBuscador.Location = new System.Drawing.Point(589, 113);
+            this.botonBuscador.Location = new System.Drawing.Point(502, 129);
             this.botonBuscador.Name = "botonBuscador";
             this.botonBuscador.Size = new System.Drawing.Size(116, 21);
             this.botonBuscador.TabIndex = 2;
@@ -62,9 +63,9 @@
             // 
             // buscador
             // 
-            this.buscador.Location = new System.Drawing.Point(240, 114);
+            this.buscador.Location = new System.Drawing.Point(240, 129);
             this.buscador.Name = "buscador";
-            this.buscador.Size = new System.Drawing.Size(330, 20);
+            this.buscador.Size = new System.Drawing.Size(246, 20);
             this.buscador.TabIndex = 3;
             this.buscador.Text = "Busca aqui";
             this.buscador.TextChanged += new System.EventHandler(this.buscador_TextChanged);
@@ -72,9 +73,9 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(240, 141);
+            this.dataGridView1.Location = new System.Drawing.Point(240, 169);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(465, 251);
+            this.dataGridView1.Size = new System.Drawing.Size(465, 223);
             this.dataGridView1.TabIndex = 4;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -88,12 +89,23 @@
             this.desplegableActores1.TabIndex = 0;
             this.desplegableActores1.SelectedIndexChanged += new System.EventHandler(this.desplegableActores1_SelectedIndexChanged);
             // 
+            // button1
+            // 
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(643, 114);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(62, 49);
+            this.button1.TabIndex = 5;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // VentanaPrincipal
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(939, 567);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.buscador);
             this.Controls.Add(this.botonBuscador);
@@ -116,5 +128,6 @@
         private System.Windows.Forms.TextBox buscador;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ComboBox desplegableActores1;
+        private System.Windows.Forms.Button button1;
     }
 }

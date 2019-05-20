@@ -17,13 +17,11 @@ namespace EjemploConexionBBDD
 
         public Login()
         {
-            InitializeComponent();
+            InitializeComponent();  
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
-
             MySqlConnection conexion = new ConexionBBDD().conecta();
             MySqlCommand comando = new MySqlCommand("" +
                 "Select * FROM usuarios WHERE " +
