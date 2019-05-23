@@ -27,7 +27,7 @@ namespace EjemploConexionBBDD
                 "Select * FROM usuarios WHERE " +
                 "usuario = '" +  textBox1.Text +
                 "'And pass = '" + textBox2.Text +
-                "';'", conexion);
+                "' ;'", conexion);
             MySqlDataReader resultado = comando.ExecuteReader();
             
             if (resultado.Read())
@@ -71,11 +71,6 @@ namespace EjemploConexionBBDD
         {
             button1.Enabled = true;
             timer1.Stop();
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -17,7 +17,7 @@ namespace EjemploConexionBBDD
         public VentanaPrincipal()
         {
             InitializeComponent();
-            rellenaComboAutores();
+
         }
 
         //codigo para que al cerrar este form, se cierre la app completa
@@ -27,83 +27,190 @@ namespace EjemploConexionBBDD
             Application.Exit();
         }
 
-        private void rellenaComboAutores()
+        private void rellenaBuscador()
         {
             MySqlConnection conexion = new ConexionBBDD().conecta();
-            MySqlCommand comando = 
-              new MySqlCommand("Select * from actors order by first_name", conexion);
+            String auxiliar = buscador.Text;
+            MySqlCommand comando = new MySqlCommand("SELECT * FROM movies WHERE name like '" + auxiliar + "%'"
+                , conexion);
             MySqlDataReader resultado = comando.ExecuteReader();
+
+            dataGridView1.Rows.Clear();
+
             while (resultado.Read())
             {
                 String id = resultado.GetString(0);
+                String first_name = resultado.GetString(1);
+                String year = resultado.GetString(2);
+
+                String rank = "";
+                if (!resultado.IsDBNull(3))
+                    rank = resultado.GetString(3);
+
+
+                if (!resultado.IsDBNull(3)) { rank = resultado.GetString(3); }
+                //String film_count = resultado.GetString(4);
+                //comboBox1.Items.Add(id + "      |      " + first_name + "      |      " + year + "     |      " + rank);
+
+                dataGridView1.Rows.Add(id, first_name, year, rank);
+
+            }
+
+            conexion.Close();
+        }
+
+
+        private void rellenaBuscadorActores()
+        {
+            MySqlConnection conexion = new ConexionBBDD().conecta();
+            String auxiliar = buscador.Text;
+            dataGridView2.Rows.Clear();
+            MySqlCommand comando = new MySqlCommand("SELECT actors.id, actors.first_name, actors.last_name, actors.gender, actors.film_count" +
+                                                 " FROM actors where first_name like '" + auxiliar + "%' "
+                , conexion);
+            MySqlDataReader resultado = comando.ExecuteReader();
+
+
+
+            while (resultado.Read())
+            {
+                String id = resultado.GetString("id");
                 String first_name = resultado.GetString("first_name");
                 String last_name = resultado.GetString("last_name");
                 String gender = resultado.GetString("gender");
-                String film_count = resultado.GetString("film_count");
-                //para que no de fallo cuando un campo sea nulo
-                //if (!resultado.IsDBNull(3)) { rank = resultado.GetString(3); }
-                desplegableActores1.Items.Add(id + "--" + first_name + "--" + last_name);
+                String film_count = resultado.GetString("gender");
+
+
+                dataGridView2.Rows.Add(id, first_name, last_name, gender, film_count);
+            }
+
+            conexion.Close();
+        }
+
+
+        private void rellenaBuscadorDirectores()
+        {
+            MySqlConnection conexion = new ConexionBBDD().conecta();
+            String auxiliar = buscador.Text;
+            dataGridView3.Rows.Clear();
+            MySqlCommand comando = new MySqlCommand("SELECT directors.id, directors.first_name, directors.last_name" +
+                                                    " FROM directors where first_name like '" + auxiliar + "%' "
+                , conexion);
+            MySqlDataReader resultado = comando.ExecuteReader();
+
+            while (resultado.Read())
+            {
+                String id = resultado.GetString("id");
+                String first_name = resultado.GetString("first_name");
+                String last_name = resultado.GetString("last_name");
+
+                dataGridView3.Rows.Add(id, first_name, last_name);
             }
             conexion.Close();
         }
 
-        private void buscador_TextChanged(object sender, EventArgs e)
-        {
-            if (buscador.Text != "")    
-            {
-                dataGridView1.CurrentCell = null;
-                
-                foreach (DataGridViewRow r in dataGridView1.Rows)
-                {
-                    r.Visible = false;
-                }
 
-                foreach (DataGridViewRow r in dataGridView1.Rows)
-                    foreach (DataGridViewCell c in r.Cells)
-                {
-                        if ((c.Value.ToString().ToUpper()).IndexOf(buscador.Text.ToUpper()) == 0){
-                            r.Visible = true;
-                            break;
-                        }
-                }
-            }
-            else
+
+        private void rellenaBuscadorGeneros()
+        {
+            MySqlConnection conexion = new ConexionBBDD().conecta();
+            String auxiliar = buscador.Text;
+            dataGridView4.Rows.Clear();
+            MySqlCommand comando = new MySqlCommand("SELECT movies_genres.movie_id, movies_genres.genre" +
+                                                 " FROM movies_genres where genre like '" + auxiliar + "%' "
+                , conexion);
+            MySqlDataReader resultado = comando.ExecuteReader();
+
+
+
+            while (resultado.Read())
             {
-               dataGridView1.DataSource= ConexionBBDD.consulta();
+                String movie_id = resultado.GetString("movie_id");
+                String genre = resultado.GetString("genre");
+
+
+
+                dataGridView4.Rows.Add(movie_id, genre);
             }
+
+            conexion.Close();
         }
 
         private void botonBuscador_Click(object sender, EventArgs e)
         {
-            //ConexionBBDD.probarConexion();
-            dataGridView1.DataSource = ConexionBBDD.consulta();
+            if (desplegable.SelectedIndex == 0)
+            {
+                rellenaBuscador();
+            }
+
+            if (desplegable.SelectedIndex == 1)
+            {
+                rellenaBuscadorActores();
+            }
+            if (desplegable.SelectedIndex == 2)
+            {
+                rellenaBuscadorDirectores();
+            }
+
+
+            if (desplegable.SelectedIndex == 3)
+            {
+                rellenaBuscadorGeneros();
+            }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void desplegable_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Movies seleccionado
+            if (desplegable.SelectedIndex == 0)
+            {
+                dataGridView2.Visible = false;
+                dataGridView3.Visible = false;
+                dataGridView1.Visible = true;
+                dataGridView4.Visible = false;
+            }
+
+            // Actores seleccionado
+            if (desplegable.SelectedIndex == 1)
+            {
+                dataGridView1.Visible = false;
+                dataGridView2.Visible = true;
+                dataGridView3.Visible = false;
+                dataGridView4.Visible = false;
+            }
+
+            // Directores seleccionado
+            if (desplegable.SelectedIndex == 2)
+            {
+                dataGridView1.Visible = false;
+                dataGridView2.Visible = false;
+                dataGridView3.Visible = true;
+                dataGridView4.Visible = false;
+            }
+
+            // generos seleccionado
+            if (desplegable.SelectedIndex == 3)
+            {
+                dataGridView1.Visible = false;
+                dataGridView3.Visible = false;
+                dataGridView2.Visible = false;
+                dataGridView4.Visible = true;
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
         {
             this.Visible = false;
             Clientes c = new Clientes();
             c.Visible = true;
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void button2_Click_1(object sender, EventArgs e)
         {
-
+            this.Visible = false;
+            Alquilar a = new Alquilar();
+            a.Visible = true;
         }
 
-        private void desplegableActores1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
     }
 }

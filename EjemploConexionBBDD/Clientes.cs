@@ -17,6 +17,13 @@ namespace EjemploConexionBBDD
             InitializeComponent();
         }
 
+        //codigo para que al cerrar este form, se cierre la app completa
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            Application.Exit();
+        }
+
         private void botonBuscador2_Click(object sender, EventArgs e)
         {
             if (buscador.Text != "")
@@ -55,11 +62,6 @@ namespace EjemploConexionBBDD
             this.Visible = false;
             VentanaPrincipal v = new VentanaPrincipal();
             v.Visible = true;
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }
