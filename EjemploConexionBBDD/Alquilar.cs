@@ -57,5 +57,32 @@ namespace EjemploConexionBBDD
             VentanaPrincipal v = new VentanaPrincipal();
             v.Visible = true;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MySqlConnection conexion = new ConexionBBDD().conecta();
+            MySqlCommand comando =
+                new MySqlCommand("INSERT INTO `prestamos` (`id_usuario`, `id_peliculas`) VALUES('"+comboUsuarios.Text +"', '"+comboPelis.Text +"');", conexion);
+            MySqlDataReader resultado = comando.ExecuteReader();
+            rellenaGrid();
+        }
+
+        private void rellenaGrid()
+        {
+            MySqlConnection conexion = new ConexionBBDD().conecta();
+            MySqlCommand comando =
+                new MySqlCommand("select * from prestamos", conexion);
+            MySqlDataReader resultado = comando.ExecuteReader();
+
+            dataGridView1.Rows.Clear();
+
+            while (resultado.Read())
+            {
+                String id_usuario = resultado.GetString("id_usuario");
+                String id_peliculas = resultado.GetString("id_peliculas");
+                dataGridView1.Rows.Add(id_usuario, id_peliculas);
+            }
+            conexion.Close();
+        }
     }
 }

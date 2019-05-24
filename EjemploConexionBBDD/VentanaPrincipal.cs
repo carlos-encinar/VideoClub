@@ -78,7 +78,7 @@ namespace EjemploConexionBBDD
                 String first_name = resultado.GetString("first_name");
                 String last_name = resultado.GetString("last_name");
                 String gender = resultado.GetString("gender");
-                String film_count = resultado.GetString("gender");
+                String film_count = resultado.GetString("film_count");
 
 
                 dataGridView2.Rows.Add(id, first_name, last_name, gender, film_count);
@@ -127,8 +127,6 @@ namespace EjemploConexionBBDD
             {
                 String movie_id = resultado.GetString("movie_id");
                 String genre = resultado.GetString("genre");
-
-
 
                 dataGridView4.Rows.Add(movie_id, genre);
             }
@@ -211,6 +209,5 @@ namespace EjemploConexionBBDD
             Alquilar a = new Alquilar();
             a.Visible = true;
         }
-
     }
 }
