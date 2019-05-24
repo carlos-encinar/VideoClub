@@ -29,31 +29,26 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Clientes));
-            this.buscador = new System.Windows.Forms.TextBox();
             this.botonBuscador2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
+            this.DNI = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buscador = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
-            // buscador
-            // 
-            this.buscador.Location = new System.Drawing.Point(241, 128);
-            this.buscador.Name = "buscador";
-            this.buscador.Size = new System.Drawing.Size(244, 20);
-            this.buscador.TabIndex = 6;
-            this.buscador.Text = "Busca aqui";
-            // 
             // botonBuscador2
             // 
+            this.botonBuscador2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.botonBuscador2.Location = new System.Drawing.Point(590, 127);
             this.botonBuscador2.Name = "botonBuscador2";
             this.botonBuscador2.Size = new System.Drawing.Size(116, 21);
             this.botonBuscador2.TabIndex = 7;
             this.botonBuscador2.Text = "Buscar";
             this.botonBuscador2.UseVisualStyleBackColor = true;
-            this.botonBuscador2.Click += new System.EventHandler(this.botonBuscador_Click);
+            this.botonBuscador2.Click += new System.EventHandler(this.botonBuscador2_Click);
             // 
             // label1
             // 
@@ -70,6 +65,9 @@
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.DNI,
+            this.Nombre});
             this.dataGridView2.Location = new System.Drawing.Point(241, 169);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.Size = new System.Drawing.Size(465, 186);
@@ -77,6 +75,7 @@
             // 
             // button1
             // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(590, 361);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(116, 23);
@@ -84,6 +83,24 @@
             this.button1.Text = "Inicio";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // DNI
+            // 
+            this.DNI.HeaderText = "DNI";
+            this.DNI.Name = "DNI";
+            // 
+            // Nombre
+            // 
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            // 
+            // buscador
+            // 
+            this.buscador.Location = new System.Drawing.Point(241, 128);
+            this.buscador.Name = "buscador";
+            this.buscador.Size = new System.Drawing.Size(331, 20);
+            this.buscador.TabIndex = 6;
+            this.buscador.TextChanged += new System.EventHandler(this.buscador_TextChanged);
             // 
             // Clientes
             // 
@@ -105,10 +122,12 @@
         }
 
         #endregion
-        private System.Windows.Forms.TextBox buscador;
         private System.Windows.Forms.Button botonBuscador2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DNI;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.TextBox buscador;
     }
 }

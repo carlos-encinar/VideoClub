@@ -11,6 +11,8 @@ namespace EjemploConexionBBDD
             InitializeComponent();
             rellenaComboUsuarios();
             rellenaComboPeliculas();
+            label2.Visible = false;
+            label3.Visible = false;
         }
 
         //codigo para que al cerrar este form, se cierre la app completa
@@ -60,29 +62,52 @@ namespace EjemploConexionBBDD
 
         private void button1_Click(object sender, EventArgs e)
         {
+            label3.Visible = false;
             MySqlConnection conexion = new ConexionBBDD().conecta();
             MySqlCommand comando =
-                new MySqlCommand("INSERT INTO `prestamos` (`id_usuario`, `id_peliculas`) VALUES('"+comboUsuarios.Text +"', '"+comboPelis.Text +"');", conexion);
+                new MySqlCommand("INSERT INTO `prestamos` (`id_usuario`, `id_peliculas`) " +
+                "VALUES('"+comboUsuarios.Text +"', '"+comboPelis.Text +"');", conexion);
             MySqlDataReader resultado = comando.ExecuteReader();
-            rellenaGrid();
-        }
-
-        private void rellenaGrid()
-        {
-            MySqlConnection conexion = new ConexionBBDD().conecta();
-            MySqlCommand comando =
-                new MySqlCommand("select * from prestamos", conexion);
-            MySqlDataReader resultado = comando.ExecuteReader();
-
-            dataGridView1.Rows.Clear();
 
             while (resultado.Read())
             {
                 String id_usuario = resultado.GetString("id_usuario");
                 String id_peliculas = resultado.GetString("id_peliculas");
-                dataGridView1.Rows.Add(id_usuario, id_peliculas);
             }
-            conexion.Close();
+            rellenaBase();
+            label2.Visible = true;
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            label2.Visible = false;
+            MySqlConnection conexion = new ConexionBBDD().conecta();
+            MySqlCommand comando =
+                new MySqlCommand("DELETE FROM `prestamos` WHERE (`id_usuario`, `id_peliculas`)=('" + comboUsuarios.Text + "', '" + comboPelis.Text + "'); ", conexion);
+            MySqlDataReader resultado = comando.ExecuteReader();
+
+            while (resultado.Read())
+            {
+                String id_usuario = resultado.GetString("id_usuario");
+                String id_peliculas = resultado.GetString("id_peliculas");
+            }
+            rellenaBase();
+            label3.Visible = true;
+        }
+
+        private void rellenaBase()
+        {
+            MySqlConnection conexion = new ConexionBBDD().conecta();
+            MySqlCommand comando =
+                new MySqlCommand("SELECT * FROM prestamos", conexion);
+            MySqlDataReader resultado = comando.ExecuteReader();
+
+            while (resultado.Read())
+            {
+                String id_usuario = resultado.GetString("id_usuario");
+                String id_peliculas = resultado.GetString("id_peliculas");
+            }
+
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace EjemploConexionBBDD
 {
@@ -24,37 +25,41 @@ namespace EjemploConexionBBDD
             Application.Exit();
         }
 
-        private void botonBuscador2_Click(object sender, EventArgs e)
+        private void rellenaBuscador()
         {
-            if (buscador.Text != "")
-            {
-                dataGridView2.CurrentCell = null;
+            MySqlConnection conexion = new ConexionBBDD().conecta();
+            String auxiliar = buscador.Text;
+            MySqlCommand comando = new MySqlCommand("SELECT DNI,Nombre FROM usuario WHERE DNI like '" + auxiliar + "%'"
+                , conexion);
+            MySqlDataReader resultado = comando.ExecuteReader();
 
-                foreach (DataGridViewRow r in dataGridView2.Rows)
-                {
-                    r.Visible = false;
-                }
+            dataGridView2.Rows.Clear();
 
-                foreach (DataGridViewRow r in dataGridView2.Rows)
-                    foreach (DataGridViewCell c in r.Cells)
-                    {
-                        if ((c.Value.ToString().ToUpper()).IndexOf(buscador.Text.ToUpper()) == 0)
-                        {
-                            r.Visible = true;
-                            break;
-                        }
-                    }
-            }
-            else
+            while (resultado.Read())
             {
-                dataGridView2.DataSource = ConexionBBDD.consulta2();
+                String DNI = resultado.GetString(0);
+                String Nombre = resultado.GetString(1);
+                
+
+                String id = "";
+                if (!resultado.IsDBNull(1))
+                    id = resultado.GetString(1);
+
+
+                if (!resultado.IsDBNull(1)) { id = resultado.GetString(1); }
+                //String film_count = resultado.GetString(4);
+                //comboBox1.Items.Add(id + "      |      " + first_name + "      |      " + year + "     |      " + rank);
+
+                dataGridView2.Rows.Add(DNI, Nombre);
+
             }
+
+            conexion.Close();
         }
 
-        private void botonBuscador_Click(object sender, EventArgs e)
+        private void botonBuscador2_Click(object sender, EventArgs e)
         {
-            //ConexionBBDD.probarConexion();
-            dataGridView2.DataSource = ConexionBBDD.consulta2();
+            rellenaBuscador();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -62,6 +67,11 @@ namespace EjemploConexionBBDD
             this.Visible = false;
             VentanaPrincipal v = new VentanaPrincipal();
             v.Visible = true;
+        }
+
+        private void buscador_TextChanged(object sender, EventArgs e)
+        {
+            rellenaBuscador();
         }
     }
 }
